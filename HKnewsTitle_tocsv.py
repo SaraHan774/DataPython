@@ -24,14 +24,14 @@ print(len(listags)) #20
 basket = []
 
 for title in listags: 
-    strtitle = str(title) #스트링으로 변환해서 태그를 제거한다. 
-    #print(strtitle)
+    strtitle = str(title) #스트링으로 변환해서 태그를 제거한다
     #print(type(strtitle))# str으로 변환하지 않는 경우 title 은 <class 'bs4.element.Tag'>
-    titlefront = strtitle.replace("<strong class=\"tit\">", "")
-    SoTitleIs = titlefront.replace("</strong>", "")
-    basket.append(SoTitleIs)
-print(basket)       
+    titlefront = strtitle.replace("<strong class=\"tit\">", "") #앞의 태그를 제거한다
+    SoTitleIs = titlefront.replace("</strong>", "") #뒤의 태그를 제거한 것이 최종 Title 문자열이다
+    basket.append(SoTitleIs) #빈 리스트에 만든 문자열을 append 한다 
+print(basket) #리스트를 출력한다. 
 
-df = pd.DataFrame(basket)
-df.to_csv("HknewsTitle_IT.csv" , header = ["Issue Title"], index = True, encoding = 'ms949')
+df = pd.DataFrame(basket) #pandas DataFrame을 이용해서
+df.to_csv("HknewsTitle_IT.csv" , header = ["Issue Title"], index = True, encoding = 'ms949') #to_csv메소드를 이용해 엑셀 저장 
+#encoding = 'utf-8'로 저장하면 엑셀 파일로 열었을 때 한글 깨짐 -> encoding = 'ms949'로 바꾸면 깨짐 현상 해결
 
