@@ -34,18 +34,18 @@ import pytagcloud
 def wordcount(word):
     return word[0]
 
-janelist = pd.read_excel("jane.xlsx", names = ('title', 'year', 'n3', 'n4', 'n5'))
+janelist = pd.read_excel("jane.xlsx", names = ('title', 'year', 'n3', 'n4', 'n5')) #불필요한 column 삭제 용이하도록 假名붙여
 print(janelist)
 
-janeaxis = janelist.drop(['year', 'n3', 'n4', 'n5'], axis = 1)
+janeaxis = janelist.drop(['year', 'n3', 'n4', 'n5'], axis = 1) 
 #열 삭제를 위해서는 axis = 1을 명시해야 열 삭제라는 것이 명시된다. 
-janelist = janeaxis.drop([0][:])
-janelist['li'] = range(1 , len(janelist['title'])+1, 1)
+janelist = janeaxis.drop([0][:]) #불필효한 행을 삭제한다는데, 무슨 말씀이신지 잘 모르겠음...
+janelist['li'] = range(1 , len(janelist['title'])+1, 1) 
 #알파벳 카운트를 위한 열 추가하기 
-janelist.to_excel("janelist.xlsx") 
+janelist.to_excel("janelist.xlsx") #정리한 것 다시 엑셀 파일로 저장하기 
 print(janelist) 
 
-data = janelist.set_index('title').groupby(wordcount).count()["li"]
+data = janelist.set_index('title').groupby(wordcount).count()["li"] #첫 번째 단어를 기준으로 count 한다, li 열에 해당하는 것만 반환하라
 
 print(type(data)) #<class 'pandas.core.series.Series'>
 
